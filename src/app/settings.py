@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework.authtoken",
     "dj_rest_auth",
+    "allauth",
+    "drf_yasg",
 ]
 
 REST_FRAMEWORK = {
