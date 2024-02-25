@@ -10,4 +10,5 @@ urlpatterns = [
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     path("admin/", admin.site.urls),
     path("auth/", include("authen.urls")),
+    path("api/", include("song.urls")),
 ]
