@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "user",
     "song",
+    "asset",
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework.authtoken",
@@ -129,3 +130,4 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
+AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
