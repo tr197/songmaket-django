@@ -31,3 +31,7 @@ class SongSearchSerializer(serializers.Serializer):
         required=False,
         help_text="Text to search for in song titles and artist names.",
     )
+
+
+class IncreaseViewSerializer(serializers.Serializer):
+    song_id = serializers.CharField(max_length=100)

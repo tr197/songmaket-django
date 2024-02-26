@@ -3,8 +3,8 @@ from song.models import Artist, Song
 
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ("title", "artist")
-    list_filter = ("title",)
+    list_display = ("title", "artist", "view_count")
+    list_filter = ("artist",)
     search_fields = [
         "title",
     ]

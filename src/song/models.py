@@ -37,6 +37,7 @@ class Song(models.Model):
     image = models.ImageField(null=True, blank=False, upload_to="songs/image/")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    view_count = models.IntegerField(null=False, blank=True, default=0)
 
     class Meta:
         db_table = "song"
