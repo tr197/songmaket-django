@@ -5,15 +5,16 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from song.models import Song, Artist
 from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import get_object_or_404
 from song.serializers import (
     SongSerializer,
     SongSearchSerializer,
     ArtistSerializer,
     IncreaseViewSerializer,
 )
-from song.pagination import CustomPagination
+from song.pagination import CustomPagination, PAGE_SIZE
 from song.filters import SongFilter
+from asset.models import Banner
+from asset.serializers import BannerSerializer
 
 
 class SongListAPIView(ListAPIView):
@@ -64,10 +65,9 @@ class SongSearchAPIView(APIView):
 class SongHomeAPIView(APIView):
     def get(self, request, *args, **kwargs):
 
-        LIMIT_ITEMS = 10
-
-        new_songs = Song.objects.all().order_by("-created_at")[:LIMIT_ITEMS]
-        top_songs = Song.objects.all().order_by("-view_count")[:LIMIT_ITEMS]
+        total = Song.objects.count()
+        new_songs = Song.objects.order_by("-created_at")[:PAGE_SIZE]
+        top_songs = Song.objects.order_by("-view_count")[:PAGE_SIZE]
 
         new_songs_serializer = SongSerializer(
             new_songs, many=True, context={"request": request}
@@ -76,9 +76,16 @@ class SongHomeAPIView(APIView):
             top_songs, many=True, context={"request": request}
         )
 
+        banners = Banner.objects.all()
+        banners_serializer = BannerSerializer(
+            banners, many=True, context={"request": request}
+        )
+
         combined_data = {
+            "total": total,
             "new_songs": new_songs_serializer.data,
             "top_songs": top_songs_serializer.data,
+            "banners": banners_serializer.data,
         }
 
         return Response(combined_data)

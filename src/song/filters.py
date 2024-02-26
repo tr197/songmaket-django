@@ -6,7 +6,7 @@ class SongFilter(FilterSet):
     title = CharFilter(lookup_expr="icontains")
     artist_name = CharFilter(field_name="artist__name", lookup_expr="icontains")
     artist = CharFilter(field_name="artist", lookup_expr="exact")
-    ordering = OrderingFilter(fields=("title", "created_at"))
+    ordering = OrderingFilter(fields=("title", "created_at", "view_count"))
 
     class Meta:
         model = Song

@@ -8,7 +8,7 @@ from song.views import (
 
 urlpatterns = [
     path("home/", SongHomeAPIView.as_view()),
-    path("songs/", SongListAPIView.as_view()),
+    path("songs", SongListAPIView.as_view()),
     path("songs-search", SongSearchAPIView.as_view()),
     path("increase-view/", IncreaseViewAPIView.as_view()),
 ]
